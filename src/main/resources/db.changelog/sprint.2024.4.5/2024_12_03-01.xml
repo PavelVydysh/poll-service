@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="2024_12_03-01" author="p.vydysh">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="poll"/>
+            </not>
+        </preConditions>
+        <createTable tableName="poll" remarks="Информация об опросе">
+            <column name="poll_id"
+                    type="UUID"
+                    remarks="Идентификатор опроса">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="title"
+                    type="TEXT"
+                    remarks="Заголовок опроса">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_date"
+                    type="TIMESTAMPTZ"
+                    remarks="Дата создания опроса">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

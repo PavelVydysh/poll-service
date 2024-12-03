@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="2024_12_03-04" author="p.vydysh">
+        <preConditions>
+            <not>
+                <tableExists tableName="poll_version_and_available_answer"/>
+            </not>
+        </preConditions>
+        <createTable tableName="poll_version_and_available_answer"
+                     remarks="Информация о связи версия опроса с вариантами ответов">
+            <column name="poll_version_and_available_answer_id"
+                    type="UUID"
+                    remarks="Идентификатор связи версии опроса с вариантом ответа">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="poll_version_id"
+                    type="UUID"
+                    remarks="Идентификатор версии">
+                <constraints nullable="false"/>
+            </column>
+            <column name="available_answer_id"
+                    type="UUID"
+                    remarks="Идентификатор варианта ответа">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
