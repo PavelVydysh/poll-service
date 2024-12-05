@@ -1,5 +1,5 @@
 server:
-  port: {SERVER_PORT:8085}
+  port: ${SERVER_PORT:8080}
 
 spring:
   application:
@@ -13,14 +13,21 @@ spring:
       hibernate:
         jdbc:
           lob.non_contextual_creation: true
-          batch_size: 30
         order_inserts: true
     open_in_view: true
   liquibase:
-    enabled: ${POLL_SERVICE_LIQUIBASE_BASENAME:false}
+    enabled: ${POLL_SERVICE_LIQUIBASE_ENABLED:false}
     change-log: classpath:db/changelog/master.xml
 
 info:
   application:
     version: '@project.version@'
 
+logging:
+  patter:
+    console: "${LOG_CONSOLE_PATTERN:%d{yyyy-MM-dd HH:mm:ss.SSS} %+5level --- [%+15.15thread] %-40.40logger{36} : %msg%n}"
+  level:
+    ROOT: INFO
+    org.example: ${POLL_SERVICE_LOG_LEVEL:INFO}
+    org.springframework: ${POLL_SERVICE_LOG_LEVEL_SPRING:INFO}
+    org.hibernate.sql: ${POLL_SERVICE_LOG_LEVEL_HIBERNATE_SQL:INFO}

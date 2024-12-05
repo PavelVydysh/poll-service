@@ -31,5 +31,12 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+
+        <addForeignKeyConstraint constraintName="fk_poll_id"
+                                 baseTableName="poll_version"
+                                 baseColumnNames="poll_id"
+                                 referencedTableName="poll"
+                                 referencedColumnNames="poll_id"
+                                 onUpdate="CASCADE" onDelete="CASCADE"/>
     </changeSet>
 </databaseChangeLog>

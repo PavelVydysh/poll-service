@@ -27,6 +27,20 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+
+        <addForeignKeyConstraint constraintName="fk_poll_version_id"
+                                 baseTableName="poll_version_and_available_answer"
+                                 baseColumnNames="poll_version_id"
+                                 referencedTableName="poll_version"
+                                 referencedColumnNames="poll_version_id"
+                                 onUpdate="CASCADE" onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint constraintName="fk_available_answer_id"
+                                 baseTableName="poll_version_and_available_answer"
+                                 baseColumnNames="available_answer_id"
+                                 referencedTableName="available_answer"
+                                 referencedColumnNames="available_answer_id"
+                                 onUpdate="CASCADE" onDelete="CASCADE"/>
     </changeSet>
 
 </databaseChangeLog>
