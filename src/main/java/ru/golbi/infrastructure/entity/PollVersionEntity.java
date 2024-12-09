@@ -3,11 +3,15 @@ package ru.golbi.infrastructure.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -39,5 +43,15 @@ public class PollVersionEntity {
 
     @Column(name = CREATION_DATE_COLUMN_NAME)
     private LocalDate creationDate;
+
+    @ManyToMany
+    @JoinTable(
+            name = PollVersionAndAvailableAnswerEntity.TABLE_NAME,
+            joinColumns = @JoinColumn(name = PollVersionAndAvailableAnswerEntity.POLL_VERSION_ID_COLUMN_NAME,
+                    updatable = false, insertable = false),
+            inverseJoinColumns = @JoinColumn(name = PollVersionAndAvailableAnswerEntity.AVAILABLE_ANSWER_ID_COLUMN_NAME,
+                    updatable = false, insertable = false)
+    )
+    private List<AvailableAnswerEntity> availableAnswerEntities;
 
 }
