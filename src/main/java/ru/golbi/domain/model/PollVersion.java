@@ -20,7 +20,7 @@ public class PollVersion {
     private List<AvailableAnswer> availableAnswers;
 
     public PollVersion() {
-        this.creationDate = getCreationDate();
+        this.creationDate = OffsetDateTime.now();
     }
 
 }
