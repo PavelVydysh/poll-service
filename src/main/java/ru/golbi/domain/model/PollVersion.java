@@ -13,14 +13,14 @@ public class PollVersion {
 
     private UUID pollVersionId;
 
-    private String title;
-
-    private String description;
-
     private Integer versionNumber;
 
     private OffsetDateTime creationDate;
 
-    List<AvailableAnswers> availableAnswers;
+    private List<AvailableAnswer> availableAnswers;
+
+    public PollVersion() {
+        this.creationDate = getCreationDate();
+    }
 
 }

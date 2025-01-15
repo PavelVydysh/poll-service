@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class AvailableAnswers {
+public class AvailableAnswer {
 
     private UUID availableAnswerId;
 
