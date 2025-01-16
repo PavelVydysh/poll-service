@@ -18,6 +18,18 @@
                 <constraints primaryKey="true"/>
             </column>
 
+            <column name="title"
+                    type="TEXT"
+                    remarks="Заголовок опроса">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="description"
+                    type="TEXT"
+                    remarks="Описание опроса">
+                <constraints nullable="true"/>
+            </column>
+
             <column name="creator_id"
                     type="TEXT"
                     remarks="Идентификатор создателя опроса">
@@ -50,18 +62,6 @@
                     type="UUID"
                     remarks="Идентификатор опроса">
                 <constraints nullable="false"/>
-            </column>
-
-            <column name="title"
-                    type="TEXT"
-                    remarks="Заголовок опроса">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="description"
-                    type="TEXT"
-                    remarks="Описание опроса">
-                <constraints nullable="true"/>
             </column>
 
             <column name="version_number"
@@ -118,6 +118,14 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+
+        <addForeignKeyConstraint constraintName="fk_available_answer_poll_id"
+                                 baseTableName="available_answer"
+                                 baseColumnNames="poll_version_id"
+                                 referencedTableName="poll_version"
+                                 referencedColumnNames="poll_version_id"
+                                 onUpdate="CASCADE"
+                                 onDelete="CASCADE"/>
     </changeSet>
 
 </databaseChangeLog>
