@@ -39,6 +39,9 @@ public class Poll {
                     lastVersion.getVersionNumber() + VERSION_INCREMENT_VALUE
             );
         }
+
+        versions.add(newVersion);
+        lastVersion = newVersion;
     }
 
 }
