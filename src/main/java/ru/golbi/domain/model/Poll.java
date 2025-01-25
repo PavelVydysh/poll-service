@@ -3,6 +3,7 @@ package ru.golbi.domain.model;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,20 @@ public class Poll {
 
         versions.add(newVersion);
         lastVersion = newVersion;
+    }
+
+    public void update(Poll poll, UpdatePollInfo updateInfo) {
+        if(!ObjectUtils.isEmpty(updateInfo)) {
+            String description = poll.getDescription();
+            if(Boolean.TRUE.equals(updateInfo.getClearDescription()) || StringUtils.hasText(description)) {
+                this.setDescription(description);
+            }
+        }
+
+        String title = poll.getTitle();
+        if(StringUtils.hasText(title)) {
+            this.setTitle(title);
+        }
     }
 
 }
