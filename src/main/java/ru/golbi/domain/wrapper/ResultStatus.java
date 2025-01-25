@@ -2,6 +2,7 @@ package ru.golbi.domain.wrapper;
 
 public enum ResultStatus {
 
-    OK
+    OK,
+    POLL_NOT_FOUND
 
 }
