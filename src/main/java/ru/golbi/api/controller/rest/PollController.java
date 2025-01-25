@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("${spring.application.private-prefix-path/poll}")
+@RequestMapping("${spring.application.private-prefix-path}/poll")
 public class PollController {
 
     private final PollService pollService;

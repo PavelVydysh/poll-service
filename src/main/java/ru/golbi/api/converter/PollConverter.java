@@ -14,7 +14,7 @@ public class PollConverter {
         Poll poll = new Poll();
         poll.setTitle(pollDto.getTitle());
         poll.setDescription(pollDto.getDescription());
-        poll.setCreatorId(pollDto.getCreatorId());
+        poll.setCreatorUserId(pollDto.getCreatorUserId());
         poll.setCreatorFullName(pollDto.getCreatorFullName());
 
         return poll;

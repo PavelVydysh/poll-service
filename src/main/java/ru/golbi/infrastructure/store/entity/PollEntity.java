@@ -1,16 +1,19 @@
 package ru.golbi.infrastructure.store.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.domain.Persistable;
 import ru.golbi.infrastructure.environment.PollEnvironment;
 
+import java.util.List;
 import java.util.UUID;
 
+@Getter
+@Setter
 @Entity
 @Table(name = PollEnvironment.TABLE_NAME)
-public class PollEntity {
+public class PollEntity implements Persistable<UUID> {
 
     public static final String ENTITY_NAME = "PollEntity";
 
@@ -40,6 +43,14 @@ public class PollEntity {
     @Column(name = PollEnvironment.CREATOR_FULL_NAME_COLUMN_NAME)
     private String creatorFullName;
 
-    //добавить список версий
+    @OneToMany(mappedBy = PollVersionEntity.POLL_FILED_NAME, fetch = FetchType.LAZY)
+    private List<PollVersionEntity> versions;
 
+    @Transient
+    private boolean isNew;
+
+    @Override
+    public UUID getId() {
+        return pollId;
+    }
 }

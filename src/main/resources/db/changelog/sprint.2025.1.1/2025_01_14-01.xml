@@ -100,12 +100,6 @@
                 <constraints primaryKey="true"/>
             </column>
 
-            <column name="poll_version_id"
-                    type="UUID"
-                    remarks="Идентификатор версии опроса">
-                <constraints nullable="false"/>
-            </column>
-
             <column name="title"
                     type="TEXT"
                     remarks="Заголовок варианта ответа">
@@ -118,12 +112,48 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+    </changeSet>
 
-        <addForeignKeyConstraint constraintName="fk_available_answer_poll_id"
-                                 baseTableName="available_answer"
+    <changeSet id="2025-01-14-04" author="p.vydysh">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="poll_version_and_available_answer"/>
+            </not>
+        </preConditions>
+        <createTable tableName="poll_version_and_available_answer"
+                     remarks="Связь варианта ответа с версией опроса">
+            <column name="poll_version_and_available_answer_id"
+                    type="UUID"
+                    remarks="Идентфиикатор связи">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="poll_version_id"
+                    type="UUID"
+                    remarks="Идентификатор версии опроса">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="available_answer_id"
+                    type="UUID"
+                    remarks="Идентификатор варианта ответа">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="fk_poll_version_and_available_answer_poll_version_id"
+                                 baseTableName="poll_version_and_available_answer"
                                  baseColumnNames="poll_version_id"
                                  referencedTableName="poll_version"
                                  referencedColumnNames="poll_version_id"
+                                 onUpdate="CASCADE"
+                                 onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint constraintName="fk_poll_version_and_available_answer_available_answer_id"
+                                 baseTableName="poll_version_and_available_answer"
+                                 baseColumnNames="available_answer_id"
+                                 referencedTableName="available_answer"
+                                 referencedColumnNames="available_answer_id"
                                  onUpdate="CASCADE"
                                  onDelete="CASCADE"/>
     </changeSet>

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,7 +17,7 @@ public class Poll {
 
     private UUID pollId;
 
-    private String creatorId;
+    private String creatorUserId;
 
     private String creatorFullName;
 
@@ -26,7 +27,7 @@ public class Poll {
 
     private PollVersion lastVersion;
 
-    private List<PollVersion> versions;
+    private List<PollVersion> versions = new ArrayList<>();
 
     public void createNewVersion(List<AvailableAnswer> availableAnswers) {
         PollVersion newVersion = new PollVersion();

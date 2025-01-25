@@ -9,7 +9,7 @@ import java.util.List;
 @Setter
 public class CreatePollRequestDto {
 
-    private String creatorId;
+    private String creatorUserId;
 
     private String creatorFullName;
 
