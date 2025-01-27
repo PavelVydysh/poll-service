@@ -2,7 +2,6 @@ package ru.golbi.domain.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.golbi.api.converter.UpdatePollInfoConverter;
 import ru.golbi.domain.exception.PollNotFoundException;
 import ru.golbi.domain.model.AvailableAnswer;
 import ru.golbi.domain.model.Poll;

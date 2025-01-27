@@ -3,8 +3,10 @@ package ru.golbi.infrastructure.store.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 import org.springframework.data.domain.Persistable;
 import ru.golbi.infrastructure.environment.PollEnvironment;
+import ru.golbi.infrastructure.environment.PollVersionEnvironment;
 
 import java.util.List;
 import java.util.UUID;
@@ -42,6 +44,13 @@ public class PollEntity implements Persistable<UUID> {
 
     @Column(name = PollEnvironment.CREATOR_FULL_NAME_COLUMN_NAME)
     private String creatorFullName;
+
+    @Formula(
+            value = "SELECT MAX(pv." + PollVersionEnvironment.VERSION_NUMBER_COLUMN_NAME + ") " +
+                    "FROM " + PollVersionEnvironment.TABLE_NAME + " pv " +
+                    "WHERE pv." + PollVersionEnvironment.POLL_ID_COLUMN_NAME + " = " + PollVersionEnvironment.POLL_ID_COLUMN_NAME
+    )
+    private Integer lastVersionNumber;
 
     @OneToMany(mappedBy = PollVersionEntity.POLL_FILED_NAME, fetch = FetchType.LAZY)
     private List<PollVersionEntity> versions;

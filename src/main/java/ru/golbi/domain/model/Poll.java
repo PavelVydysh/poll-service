@@ -26,7 +26,7 @@ public class Poll {
 
     private String description;
 
-    private PollVersion lastVersion;
+    private Integer lastVersionNumber;
 
     private List<PollVersion> versions = new ArrayList<>();
 
@@ -34,16 +34,16 @@ public class Poll {
         PollVersion newVersion = new PollVersion();
         newVersion.setAvailableAnswers(availableAnswers);
 
-        if (ObjectUtils.isEmpty(lastVersion)) {
+        if (ObjectUtils.isEmpty(lastVersionNumber)) {
             newVersion.setVersionNumber(DEFAULT_VERSION_NUMBER);
         } else {
             newVersion.setVersionNumber(
-                    lastVersion.getVersionNumber() + VERSION_INCREMENT_VALUE
+                    lastVersionNumber + VERSION_INCREMENT_VALUE
             );
         }
 
         versions.add(newVersion);
-        lastVersion = newVersion;
+        lastVersionNumber = newVersion.getVersionNumber();
     }
 
     public void update(Poll poll, UpdatePollInfo updateInfo) {
