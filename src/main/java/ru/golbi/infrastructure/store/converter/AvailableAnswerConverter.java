@@ -34,4 +34,27 @@ public class AvailableAnswerConverter {
 
     }
 
+    public static AvailableAnswer toAvailableAnswer(AvailableAnswerEntity availableAnswerEntity) {
+        if (ObjectUtils.isEmpty(availableAnswerEntity)) {
+            return null;
+        }
+
+        AvailableAnswer availableAnswer = new AvailableAnswer();
+        availableAnswer.setAvailableAnswerId(availableAnswerEntity.getAvailableAnswerId());
+        availableAnswer.setPosition(availableAnswerEntity.getPosition());
+        availableAnswer.setTitle(availableAnswerEntity.getTitle());
+
+        return availableAnswer;
+    }
+
+    public static List<AvailableAnswer> toListAvailableAnswer(List<AvailableAnswerEntity> availableAnswerEntities) {
+        if (CollectionUtils.isEmpty(availableAnswerEntities)) {
+            return Collections.emptyList();
+        }
+
+        return availableAnswerEntities.stream()
+                .map(AvailableAnswerConverter::toAvailableAnswer)
+                .toList();
+    }
+
 }

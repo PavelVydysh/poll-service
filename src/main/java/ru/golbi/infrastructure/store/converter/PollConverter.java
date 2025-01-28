@@ -36,6 +36,9 @@ public class PollConverter {
         poll.setDescription(pollEntity.getDescription());
         poll.setCreatorUserId(pollEntity.getCreatorUserId());
         poll.setCreatorFullName(pollEntity.getCreatorFullName());
+        poll.setLastVersion(
+                PollVersionConverter.toPollVersion(pollEntity.getLastVersion())
+        );
 
         return poll;
     }
