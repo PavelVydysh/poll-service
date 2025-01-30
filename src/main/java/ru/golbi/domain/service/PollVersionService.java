@@ -17,8 +17,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class PollVersionService {
 
-    private PollRepository pollRepository;
-    private PollVersionRepository pollVersionRepository;
+    private final PollRepository pollRepository;
+    private final PollVersionRepository pollVersionRepository;
 
     private static final Integer INCREMENT_VERSION_VALUE = 1;
     private static final Integer START_VERSION_NUMBER = 1;
@@ -31,11 +31,13 @@ public class PollVersionService {
 
         PollVersion pollVersion = new PollVersion();
 
-        if(ObjectUtils.isEmpty(lastVersion)) {
+        if (!ObjectUtils.isEmpty(lastVersion)) {
             pollVersion.setVersionNumber(lastVersion.getVersionNumber() + INCREMENT_VERSION_VALUE);
         } else {
             pollVersion.setVersionNumber(START_VERSION_NUMBER);
         }
+
+        pollVersion.setAvailableAnswers(availableAnswers);
 
         pollVersionRepository.savePollVersion(pollId, pollVersion);
     }

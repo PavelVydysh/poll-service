@@ -25,10 +25,10 @@ public class PollEntity implements Persistable<UUID> {
     public static final String CREATOR_USER_ID_FIELD_NAME = "creatorUserId";
     public static final String CREATOR_FULL_NAME_FIELD_NAME = "creatorFullName";
 
-    private static final String LAST_POLL_VERSION_JOIN_FORMULA = "select c." + PollVersionEnvironment.POLL_VERSION_ID_COLUMN_NAME + " " +
-            "from " + PollVersionEnvironment.TABLE_NAME + "pv where pv." + PollVersionEnvironment.POLL_ID_COLUMN_NAME +
+    private static final String LAST_POLL_VERSION_JOIN_FORMULA = "(select pv." + PollVersionEnvironment.POLL_VERSION_ID_COLUMN_NAME + " " +
+            "from " + PollVersionEnvironment.TABLE_NAME + " pv where pv." + PollVersionEnvironment.POLL_ID_COLUMN_NAME +
             " = " + PollVersionEnvironment.POLL_ID_COLUMN_NAME + " " +
-            "order by pv." + PollVersionEnvironment.VERSION_NUMBER_COLUMN_NAME + " desc limit 1";
+            "order by pv." + PollVersionEnvironment.VERSION_NUMBER_COLUMN_NAME + " desc limit 1)";
 
     @Id
     @Column(name = PollEnvironment.POLL_ID_COLUMN_NAME)

@@ -7,9 +7,7 @@ import java.util.UUID;
 
 public interface PollRepository {
 
-    ResultWrapper<Void> create(Poll pol);
-
-    ResultWrapper<Void> saveWithoutRelations(Poll poll);
+    ResultWrapper<Void> save(Poll pol);
 
     ResultWrapper<Poll> findPollByIdWithoutVersions(UUID pollId);
 

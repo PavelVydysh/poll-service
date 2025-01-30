@@ -17,6 +17,4 @@ public class CreatePollRequestDto {
 
     private String description;
 
-    private List<CreateAvailableAnswerRequestDto> availableAnswers;
-
 }

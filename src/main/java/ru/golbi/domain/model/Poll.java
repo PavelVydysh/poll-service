@@ -30,22 +30,6 @@ public class Poll {
 
     private List<PollVersion> versions = new ArrayList<>();
 
-    public void createNewVersion(List<AvailableAnswer> availableAnswers) {
-        PollVersion newVersion = new PollVersion();
-        newVersion.setAvailableAnswers(availableAnswers);
-
-        if (ObjectUtils.isEmpty(lastVersion)) {
-            newVersion.setVersionNumber(DEFAULT_VERSION_NUMBER);
-        } else {
-            newVersion.setVersionNumber(
-                    lastVersion.getVersionNumber() + VERSION_INCREMENT_VALUE
-            );
-        }
-
-        versions.add(newVersion);
-        lastVersion = newVersion;
-    }
-
     public void update(Poll poll, UpdatePollInfo updateInfo) {
         if(!ObjectUtils.isEmpty(updateInfo)) {
             String description = poll.getDescription();

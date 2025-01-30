@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.golbi.api.converter.AvailableAnswerConverter;
 import ru.golbi.api.dto.version.CreatePollVersionRequestDto;
 import ru.golbi.domain.model.AvailableAnswer;
+import ru.golbi.domain.service.PollVersionService;
 
 import java.util.List;
 import java.util.UUID;
@@ -17,10 +18,14 @@ import java.util.UUID;
 @RequestMapping("${spring.application.private-prefix-path}/version")
 public class PollVersionController {
 
+    private final PollVersionService pollVersionService;
+
     @PostMapping
     public void createVersion(@RequestBody CreatePollVersionRequestDto pollVersionDto) {
         UUID pollId = pollVersionDto.getPollId();
         List<AvailableAnswer> availableAnswers = AvailableAnswerConverter.toListAvailableAnswer(pollVersionDto.getAvailableAnswers());
+
+        pollVersionService.createPollVersion(pollId, availableAnswers);
     }
 
 }
