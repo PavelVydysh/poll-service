@@ -16,6 +16,7 @@ public class AvailableAnswerConverter {
         }
 
         AvailableAnswer availableAnswer = new AvailableAnswer();
+        availableAnswer.setAvailableAnswerId(availableAnswerDto.getAvailableAnswerId());
         availableAnswer.setTitle(availableAnswerDto.getTitle());
         availableAnswer.setPosition(availableAnswerDto.getPosition());
 

@@ -25,9 +25,8 @@ public class PollController {
     @PostMapping
     public void createPoll(@RequestBody CreatePollRequestDto pollDto) {
         Poll poll = PollConverter.toPoll(pollDto);
-        List<AvailableAnswer> availableAnswers = AvailableAnswerConverter.toListAvailableAnswer(pollDto.getAvailableAnswers());
 
-        pollService.createPoll(poll, availableAnswers);
+        pollService.createPoll(poll);
     }
 
     @PatchMapping("/{pollId}")
