@@ -3,17 +3,17 @@ package ru.pvydysh.poll.infrastructure.store.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import ru.pvydysh.poll.infrastructure.store.environment.PollVersionEnv;
 
 import java.time.LocalDate;
-import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -31,6 +31,7 @@ public class PollVersionEntity {
     public static final String POLL_VERSION_AVAILABLE_ANSWERS_ENTITY_FIELD_NAME = "pollVersionAvailableAnswers";
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = PollVersionEnv.POLL_VERSION_ID_COLUMN_NAME)
     private UUID pollVersionId;
 
@@ -44,10 +45,7 @@ public class PollVersionEntity {
     private LocalDate creationDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = PollVersionEnv.POLL_ID_COLUMN_NAME, insertable = false, updatable = false)
+    @JoinColumn(name = PollVersionEnv.POLL_ID_COLUMN_NAME)
     private PollEntity poll;
-
-    @OneToMany(mappedBy = "pollVersion", fetch = FetchType.LAZY)
-    private Set<PollVersionAvailableAnswerEntity> pollVersionAvailableAnswers;
 
 }

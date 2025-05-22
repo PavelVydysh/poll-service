@@ -112,11 +112,6 @@
 
         <createTable tableName="poll_version_available_answer"
                      remarks="Информация о связи варианта ответа с версией опроса">
-            <column name="poll_version_available_answer_id"
-                    type="UUID"
-                    remarks="Идентификатор связи">
-                <constraints primaryKey="true"/>
-            </column>
             <column name="poll_version_id"
                     type="UUID"
                     remarks="Идентификатор версии">

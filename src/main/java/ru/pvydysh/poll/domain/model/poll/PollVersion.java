@@ -11,7 +11,7 @@ import java.util.UUID;
 @Setter
 public class PollVersion {
 
-    private UUID pollVersion;
+    private UUID pollVersionId;
 
     private String title;
 

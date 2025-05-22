@@ -1,15 +1,20 @@
 package ru.pvydysh.poll.infrastructure.store.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
 import ru.pvydysh.poll.domain.model.enums.PollStatus;
 import ru.pvydysh.poll.infrastructure.store.environment.PollEnv;
 
@@ -29,6 +34,7 @@ public class PollEntity {
     public static final String POLL_VERSIONS_ENTITY_FIELD_NAME = "pollVersions";
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = PollEnv.POLL_ID_COLUMN_NAME)
     private UUID pollId;
 
@@ -42,7 +48,7 @@ public class PollEntity {
     @Column(name = PollEnv.STATUS_COLUMN_NAME)
     private PollStatus status;
 
-    @OneToMany(mappedBy = PollVersionEntity.POLL_ENTITY_FIELD_NAME, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = PollVersionEntity.POLL_ENTITY_FIELD_NAME, cascade = CascadeType.ALL)
     private Set<PollVersionEntity> pollVersions;
 
 }
