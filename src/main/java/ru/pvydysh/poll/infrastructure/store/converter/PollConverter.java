@@ -3,6 +3,9 @@ package ru.pvydysh.poll.infrastructure.store.converter;
 import org.springframework.util.ObjectUtils;
 import ru.pvydysh.poll.domain.model.poll.Poll;
 import ru.pvydysh.poll.infrastructure.store.entity.PollEntity;
+import ru.pvydysh.poll.infrastructure.store.entity.PollVersionEntity;
+
+import java.util.Set;
 
 public class PollConverter {
 
@@ -17,11 +20,13 @@ public class PollConverter {
         pollEntity.setStatus(poll.getStatus());
         pollEntity.setAuthorId(poll.getAuthorId());
         pollEntity.setAuthorName(poll.getAuthorName());
-        pollEntity.setPollVersions(
-                PollVersionConverter.toCollectionPollVersionEntities(
+
+        Set<PollVersionEntity> pollVersions = PollVersionConverter
+                .toSetPollVersionEntities(
                         poll.getVersions()
-                )
-        );
+                );
+        pollVersions.forEach(version -> version.setPoll(pollEntity));
+        pollEntity.setPollVersions(pollVersions);
 
         return pollEntity;
     }

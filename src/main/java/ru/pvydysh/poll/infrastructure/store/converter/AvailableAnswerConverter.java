@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class AvailableAnswerConverter {
 
-    public static final AvailableAnswerEntity toAvailableAnswerEntity(AvailableAnswer availableAnswer) {
+    public static AvailableAnswerEntity toAvailableAnswerEntity(AvailableAnswer availableAnswer) {
         if (ObjectUtils.isEmpty(availableAnswer)) {
             return null;
         }
@@ -26,7 +26,7 @@ public class AvailableAnswerConverter {
         return availableAnswerEntity;
     }
 
-    public static Set<AvailableAnswerEntity> toCollectionAvailableAnswerEntity(Collection<AvailableAnswer> availableAnswers) {
+    public static Set<AvailableAnswerEntity> toSetAvailableAnswerEntity(Collection<AvailableAnswer> availableAnswers) {
         if (CollectionUtils.isEmpty(availableAnswers)) {
             return Collections.emptySet();
         }
