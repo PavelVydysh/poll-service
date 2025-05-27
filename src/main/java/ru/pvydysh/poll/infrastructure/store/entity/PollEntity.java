@@ -48,7 +48,7 @@ public class PollEntity {
     @Column(name = PollEnv.STATUS_COLUMN_NAME)
     private PollStatus status;
 
-    @OneToMany(mappedBy = PollVersionEntity.POLL_ENTITY_FIELD_NAME, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = PollVersionEntity.POLL_ENTITY_FIELD_NAME, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<PollVersionEntity> pollVersions;
 
 }

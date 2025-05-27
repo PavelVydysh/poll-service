@@ -20,14 +20,12 @@ public class PollVersionConverter {
         PollVersionEntity pollVersionEntity = new PollVersionEntity();
         pollVersionEntity.setPollVersionId(pollVersion.getPollVersionId());
         pollVersionEntity.setTitle(pollVersion.getTitle());
-        pollVersionEntity.setPollId(pollVersion.getPollVersionId());
         pollVersionEntity.setCreationDate(pollVersion.getCreationDate());
-//        pollVersionEntity.setPollVersionAvailableAnswers(
-//                PollVersionAvailableAnswerConverter
-//                        .toCollectionPollVersionAvailableAnswerEntity(
-//                                pollVersion
-//                        )
-//        );
+        pollVersionEntity.setAvailableAnswers(
+                AvailableAnswerConverter.toCollectionAvailableAnswerEntity(
+                        pollVersion.getAvailableAnswers()
+                )
+        );
 
         return pollVersionEntity;
     }

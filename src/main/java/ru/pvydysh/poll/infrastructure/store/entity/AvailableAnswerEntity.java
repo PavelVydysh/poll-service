@@ -4,12 +4,10 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.domain.Persistable;
 import ru.pvydysh.poll.infrastructure.store.environment.AvailableAnswerEnv;
 
 import java.util.Set;
@@ -19,7 +17,7 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = AvailableAnswerEnv.TABLE_NAME)
-public class AvailableAnswerEntity implements Persistable<UUID> {
+public class AvailableAnswerEntity {
 
     public static final String ENTITY_NAME = "AvailableAnswerEntity";
     public static final String AVAILABLE_ANSWER_ID_FIELD_NAME = "availableAnswerId";
@@ -37,12 +35,7 @@ public class AvailableAnswerEntity implements Persistable<UUID> {
     @Column(name = AvailableAnswerEnv.POSITION_COLUMN_NAME)
     private Integer position;
 
-    @Transient
-    private boolean isNew;
-
-    @Override
-    public UUID getId() {
-        return availableAnswerId;
-    }
+    @ManyToMany(mappedBy = PollVersionEntity.AVAILABLE_ANSWERS_ENTITY_FIELD_NAME, fetch = FetchType.LAZY)
+    private Set<PollVersionEntity> pollVersions;
 
 }

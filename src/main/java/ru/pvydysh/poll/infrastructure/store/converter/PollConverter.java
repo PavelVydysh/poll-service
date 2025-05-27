@@ -11,15 +11,19 @@ public class PollConverter {
             return null;
         }
 
-//        PollEntity pollEntity = new PollEntity();
-//
-//        pollEntity.setPollId(poll.getPollId());
-//        pollEntity.setStatus(poll.getStatus());
-//        pollEntity.setAuthorId(poll.getAuthorId());
-//        pollEntity.setAuthorName(poll.getAuthorName());
-//
-//        char a = '\n';
-        return null;
+        PollEntity pollEntity = new PollEntity();
+
+        pollEntity.setPollId(poll.getPollId());
+        pollEntity.setStatus(poll.getStatus());
+        pollEntity.setAuthorId(poll.getAuthorId());
+        pollEntity.setAuthorName(poll.getAuthorName());
+        pollEntity.setPollVersions(
+                PollVersionConverter.toCollectionPollVersionEntities(
+                        poll.getVersions()
+                )
+        );
+
+        return pollEntity;
     }
 
 }
