@@ -27,6 +27,10 @@ public class PollVersionConverter {
                 .toSetAvailableAnswerEntity(
                         pollVersion.getAvailableAnswers()
                 );
+        availableAnswers.forEach(availableAnswer -> availableAnswer
+                .getPollVersions()
+                .add(pollVersionEntity)
+        );
         pollVersionEntity.setAvailableAnswers(availableAnswers);
 
         return pollVersionEntity;

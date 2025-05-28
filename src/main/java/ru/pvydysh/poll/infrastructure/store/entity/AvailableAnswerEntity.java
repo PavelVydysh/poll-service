@@ -8,8 +8,10 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.util.CollectionUtils;
 import ru.pvydysh.poll.infrastructure.store.environment.AvailableAnswerEnv;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -37,5 +39,13 @@ public class AvailableAnswerEntity {
 
     @ManyToMany(mappedBy = PollVersionEntity.AVAILABLE_ANSWERS_ENTITY_FIELD_NAME, fetch = FetchType.LAZY)
     private Set<PollVersionEntity> pollVersions;
+
+    public Set<PollVersionEntity> getPollVersions() {
+        if(CollectionUtils.isEmpty(pollVersions)) {
+            pollVersions = new HashSet<>();
+        }
+
+        return pollVersions;
+    }
 
 }
